@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+<script>
+    let ctx = {}
+    let _pieChart = {}
+    let _chartLabels = ['Red', 'Orange', 'Yellow', 'Green', 'Blue']
+    let _chartData = [78,90,88,67,65]
+
+    // Register the plugin to all charts:
+    Chart.register(ChartDataLabels);
+
+</script>
+
+<header class="header regular">
+
+    <div class="container">
+        <%- include('./partials/nav.ejs', {auth:auth}) %>
+    </div>
+
+</header>
+
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+
+<main>
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+
+            <h2 class="event-option__heading text-center">Covid-19 Report</h2>
+            <p class="event-options__body text-center">September, 2022</p>
+            <p class="event-options__body text-center">Breakdown by Continent</p>
+
+            <div class="event event--options pt-1 tabs">
+
+             <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Total Cases</th>
+                                    <th scope="col">Total Tests</th>
+                                    <th scope="col">Total Recovered</th>
+                                    <th scope="col">Total Deaths</th>
+                                </tr>
+                            </thead>
+
+                             <% byContent.forEach(function (data) { %>
+                                <tbody>
+                                    <tr>
+                                        <th><%= data.Continent %></th>
+                                        <td><%= data.TotalCases %></td>
+                                        <td><%= data.TotalTests %></td>
+                                        <td><%= data.TotalRecovered %></td>
+                                        <td><%= data.TotalDeaths %></td>
+                                    </tr>
+                                </tbody>
+                            <% }) %>
+
+                        </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+
+            <p class="event-options__body text-center">Summary by Continent</p>
+
+            <div class="event event--options pt-1">
+
+                <div class="contact">
+
+
+
+                    <%
+                    let i = 0
+
+                    byContent.forEach(function (data) {
+                        i++
+
+                    %>
+                    <div class="event__card w-mobile-100">
+                        <h2><%= data.Continent%></h2>
+                        <canvas id="contiPieChart<%= i%>" height="200"></canvas>
+                        <script>
+
+                            _chartLabels = ['Total Cases', 'Total Tests', 'Total Recovered', 'Total Deaths',]
+                            _chartData = ['<%= data.TotalCases%>', '<%= data.TotalTests%>', '<%= data.TotalRecovered%>', '<%= data.TotalDeaths%>']
+
+                            ctx['<%= i%>']= document.getElementById(`contiPieChart<%= i%>`).getContext('2d');
+                            console.log(ctx['<%= i%>'])
+                            _pieChart['<%= i%>'] = new Chart(ctx['<%= i%>'], {
+                                plugins: [ChartDataLabels],
+                                type: 'pie',
+                                data: {
+                                    labels: _chartLabels,
+                                    datasets: [
+                                        {
+                                            label: 'Dataset 1',
+                                            data: _chartData,
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)'
+                                            ],
+                                            borderWidth: [1,1,1,1]
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                        },
+                                       /* labels: {
+                                            render: 'percentage',
+                                            fontColor: ['green', 'white', 'red', 'blue'],
+                                            precision: 2
+                                        },
+                                        datalabels: {
+                                            color: 'pink',
+                                            labels: {
+                                                value: {},
+                                                title: {
+                                                    color: 'blue'
+                                                }
+                                            }
+                                        },*/
+                                        title: {
+                                            display: true,
+                                            text: '<%= data.Continent%>t'
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                    <% }) %>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</main>
+
+<%- include('./partials/footer.ejs') %>
+
+</body>
+
+</html>

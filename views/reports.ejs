@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+<script>
+
+</script>
+
+<header class="header regular">
+
+    <div class="container">
+        <%- include('./partials/nav.ejs', {auth:auth}) %>
+    </div>
+
+</header>
+
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+
+<main>
+
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+            <h2 class="event-option__heading text-center">Covid-19 Report</h2>
+            <p class="event-options__body text-center">September, 2022</p>
+            <p class="event-options__body text-center"><%= continent %> Data</p>
+
+            <div class="event event--options pt-1 tabs">
+
+                <div class="pricing-table">
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalCases%></h3>
+                        <ul>
+                            <li>Total Cases</li>
+                        </ul>
+                    </div>
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalTests%></h3>
+                        <ul>
+                            <li>Total Tests</li>
+                        </ul>
+                    </div>
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalRecovered%></h3>
+                        <ul>
+                            <li>Total Recovered</li>
+                        </ul>
+                    </div>
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalDeaths%></h3>
+                        <ul>
+                            <li>Total Deaths</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="event event--options sponsors">
+        <div class="container">
+            <p class="event-options__body text-center">September, 2022 </p>
+
+            <div id="sponsors">
+                <div>
+                    <div class="sponsor-wrapper" >
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                        <script>
+                            const ctx = document.getElementById('myChart').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                    labels: <%- JSON.stringify(globalLabels) %>,
+                                    datasets: [{
+                                        label: `<%- title %>`,
+                                        data: <%- JSON.stringify(globalData) %>,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-options pt-1">
+        <div class="container">
+            <h2 class="event-option__heading text-center">Continent Report</h2>
+            <p class="event-options__body text-center">
+                <%= continent %>  Data
+            </p>
+
+            <div class="event event--options pt-1 tabs">
+
+                <ul class="tab-navs">
+                    <li id="day-one-tab">
+                        <a href="/reports/Africa">
+                            <h3> Africa </h3>
+                        </a>
+                    </li>
+                    <li id="day-one-tab">
+                        <a href="/reports/Asia">
+                            <h3> Asia </h3>
+                        </a>
+                    </li>
+                    <li id="day-one-tab">
+                        <a href="/reports/Australia_Oceania">
+                            <h3> Australia/Oceania </h3>
+                        </a>
+                    </li>
+                    <li id="day-one-tab">
+                        <a href="/reports/Europe">
+                            <h3> Europe </h3>
+                        </a>
+                    </li>
+                    <li id="day-one-tab">
+                        <a href="/reports/North-America">
+                            <h3> North America </h3>
+                        </a>
+                    </li>
+                    <li id="day-one-tab">
+                        <a href="/reports/South-America">
+                            <h3> South America </h3>
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-contents">
+                    <div class="covid__data_wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Country/Region</th>
+                                    <th scope="col">Population</th>
+                                    <th scope="col">Total Cases</th>
+                                    <th scope="col">Total Tests</th>
+                                    <th scope="col">Total Recovered</th>
+                                    <th scope="col">Total Deaths</th>
+                                </tr>
+                            </thead>
+
+                            <% covidData.forEach(function (data) { %>
+
+                                <tbody>
+                                    <tr>
+                                        <td><%= data['Country/Region'] %></td>
+                                        <td><%= data.Population %></td>
+                                        <td><%= data.TotalCases %></td>
+                                        <td><%= data.TotalTests %></td>
+                                        <td><%= data.TotalRecovered %></td>
+                                        <td><%= data.TotalDeaths %></td>
+                                    </tr>
+                                </tbody>
+                            <% }) %>
+
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+
+</main>
+
+<%- include('./partials/footer.ejs') %>
+
+</body>
+
+</html>

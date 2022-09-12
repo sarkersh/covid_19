@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<header class="header regular">
+
+    <div class="container">
+        <%- include('./partials/nav.ejs'), {auth:auth} %>
+    </div>
+
+</header>
+
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+
+<main>
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+
+            <h1 class="event-option__heading text-center">404 Page not found</h1>
+            <div class="event event--options pt-1">
+
+                <div class="faq wrapper">
+
+                    <div class="event__card">
+                        <p><a href="/"><button>Back to home page</button></a></p>                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+<%- include('./partials/footer.ejs') %>
+
+
+
+</body>
+
+</html>

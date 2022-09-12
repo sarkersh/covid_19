@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<header class="header">
+    <div class="container">
+        <%- include('./partials/nav.ejs', {auth:auth}) %>
+    </div>
+</header>
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+<main>
+
+    <section class="hero">
+
+        <div class="hero__image">
+            <img src="img/covid/world-covid-report.jpg" alt="covid report!">
+        </div>
+
+        <div class="container hero__container">
+
+            <div class="hero-wrapper">
+                <h1 class="hero-wrapper__heading">World Covid-19 Report <span> September 2022</span>.</h1>
+                <p class="hero-wrapper__body">
+                    Kaggle Covid-19 Dataset
+                </p>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+
+            <h2 class="event-option__heading text-center">Corona Virus report</h2>
+            <p class="event-options__body text-center">Source: Kaggle</p>
+            <p class="event-options__body text-center">
+                <small>
+                    https://www.kaggle.com/datasets/imdevskp/corona-virus-report?select=worldometer_data.csv</i>
+                </small>
+            </p>
+
+            <div class="event event--options pt-1 tabs">
+
+                <div class="pricing-table">
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalCases%></h3>
+                        <ul>
+                            <li>Total Cases</li>
+                        </ul>
+                    </div>
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalTests%></h3>
+                        <ul>
+                            <li>Total Tests</li>
+                        </ul>
+                    </div>
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalRecovered%></h3>
+                        <ul>
+                            <li>Total Recovered</li>
+                        </ul>
+                    </div>
+                    <div class="event__card">
+                        <h3 class="event__card-title"><%= globalTotals.TotalDeaths%></h3>
+                        <ul>
+                            <li>Total Deaths</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section class="event event--options sponsors">
+        <div class="container">
+
+            <p class="event-options__body text-center">September, 2022 </p>
+
+            <div id="sponsors">
+                <div>
+                    <div class="sponsor-wrapper" >
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                        <script>
+                            const ctx = document.getElementById('myChart').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                                    labels: <%- JSON.stringify(globalLabels) %>,
+                                    datasets: [{
+                                        label: `<%- title %>`,
+                                        data: <%- JSON.stringify(globalData) %>,
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-options pt-1">
+        <div class="container">
+            <p class="event-options__body text-center">September, 2022</p>
+
+            <div class="event event--options pt-1 tabs">
+
+                <div class="tab-contents">
+                    <div class="covid__data_wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Country/Region</th>
+                                    <th scope="col">Population</th>
+                                    <th scope="col">Total Cases</th>
+                                    <th scope="col">Total Tests</th>
+                                    <th scope="col">Total Recovered</th>
+                                    <th scope="col">Total Deaths</th>
+                                </tr>
+                            </thead>
+
+                            <% covidData.forEach(function (data) { %>
+
+                                <tbody>
+                                    <tr>
+                                        <td><%= data['Country/Region'] %></td>
+                                        <td><%= data.Population %></td>
+                                        <td><%= data.TotalCases %></td>
+                                        <td><%= data.TotalTests %></td>
+                                        <td><%= data.TotalRecovered %></td>
+                                        <td><%= data.TotalDeaths %></td>
+                                    </tr>
+                                </tbody>
+                            <% }) %>
+<!--                            <caption>Source: https://www.kaggle.com/datasets/imdevskp/corona-virus-report?select=worldometer_data.csv</caption>-->
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<%- include('./partials/footer.ejs') %>
+<script src="js/script.js" defer></script>
+
+<script>
+
+
+
+</script>
+
+</body>
+
+</html>

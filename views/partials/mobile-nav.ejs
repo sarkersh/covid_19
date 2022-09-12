@@ -1,0 +1,30 @@
+<nav class="mobile-menu" id="mobileMenu">
+    <div class="sr-only">Mobile Navigation</div>
+    <div class="mobie-nav-close"></div>
+
+    <ul>
+        <li><a href="/" class="mobile-menu__link">Home</a></li>
+        <% if (auth.isAuthorized > 0) { %>
+            <li><a href="/users/list" class="mobile-menu__link">User List</a></li>
+            <li class="dropdown">
+                <span  class="mobile-menu__link">Report</span>
+                <div class="dropdown-content">
+                    <a href="/reports" class="mobile-menu__link">Reports</a>
+                    <a href="/reports/continental" class="mobile-menu__link">Continent Report</a>
+                </div>
+            </li>
+        <% } %>
+        <li class="dropdown">
+            <span  class="mobile-menu__link">My Accounts</span>
+            <div class="dropdown-content">
+                <% if (auth.isAuthorized) { %>
+                    <a href="/users/logout" class="mobile-menu__link">Logout</a>
+                <% }else{ %>
+                    <a href="/users/login" class="mobile-menu__link">Login</a>
+                    <a href="/users/register" class="mobile-menu__link">Register</a>
+                <% } %>
+            </div>
+        </li>
+    </ul>
+
+</nav>

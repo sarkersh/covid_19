@@ -1,0 +1,46 @@
+<div class="header-logo">
+  <span class="sr-only">WorldCovid19Report</span>
+
+  <a href="/" class="text-logo">
+    World Covid19 Report
+  </a>
+</div>
+<div class="header__menu">
+
+  <!-- Mobile Navigation Start -->
+  <button class="button" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobileMenu" data-target="#mobileMenu">
+    <img src="/img/menu.svg" alt="Mobile Menu">
+  </button>
+  <!-- Mobile Navigation End -->
+
+
+  <nav class="desktop-menu">
+    <div class="sr-only">Main Navigation</div>
+    <ul>
+      <li><a href="/" class="desktop-menu__link active">Home</a></li>
+      <% if (auth.isAuthorized > 0) { %>
+        <li><a href="/users/list" class="desktop-menu__link">User List</a></li>
+        <li class="dropdown">
+          <span  class="desktop-menu__link active">Report</span>
+          <div class="dropdown-content">
+            <a href="/reports" class="desktop-menu__link">Reports</a>
+            <a href="/reports/continental" class="desktop-menu__link">Continent Report</a>
+          </div>
+        </li>
+        <% } %>
+      <li class="dropdown">
+        <span  class="desktop-menu__link active">My Accounts</span>
+        <div class="dropdown-content">
+          <% if (auth.isAuthorized) { %>
+            <a href="/users/logout" class="desktop-menu__link">Logout</a>
+          <% }else{ %>
+              <a href="/users/login" class="desktop-menu__link">Login</a>
+              <a href="/users/register" class="desktop-menu__link">Register</a>
+          <% } %>
+        </div>
+      </li>
+    </ul>
+
+  </nav>
+
+</div>

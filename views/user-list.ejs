@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<header class="header regular">
+
+    <div class="container">
+        <%- include('./partials/nav.ejs', {auth:auth}) %>
+    </div>
+
+</header>
+
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+
+<main>
+
+
+
+    <section class="event-options pt-1">
+        <div class="container">
+
+            <h1 class="event-option__heading text-center">User List</h1>
+
+
+            <div class="event event--options pt-1 tabs">
+
+                <div class="tab-contents">
+                    <div class="covid__data_wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Use ID</th>
+                                    <th scope="col">fullname</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+
+                            <% userData.forEach(function (data) { %>
+
+                                <tbody>
+                                    <tr>
+                                        <td><%= data._id %></td>
+                                        <td><%= data.fullname %></td>
+                                        <td><%= data.email %></td>
+                                        <td>
+                                            <% if(auth.isAdmin){ %>
+                                                <a href="/users/edit/<%= data._id%>">
+                                                    <button>Edit</button>
+                                                </a>
+                                                <a href="/users/delete/<%= data._id%>">
+                                                    <button>Delete</button>
+                                                </a>
+                                            <% } %>
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            <% }) %>
+
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+
+</main>
+
+<%- include('./partials/footer.ejs') %>
+<script src="js/script.js" defer></script>
+
+<script>
+
+
+
+</script>
+
+</body>
+
+</html>

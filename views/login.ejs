@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<header class="header regular">
+
+    <div class="container">
+        <%- include('./partials/nav.ejs', {auth:auth}) %>
+    </div>
+
+</header>
+
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+
+<main>
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+
+            <h1 class="event-option__heading text-center">User Login</h1>
+            <p class="event-options__body text-center">Login to see detail reports</p>
+
+            <div class="event event--options pt-1">
+
+                <div class="contact">
+
+                    <div class="event__card">
+                        <p class="event__card-body">Not registered yet?</p>
+                        <a href="/users/register" class="w-50">
+                            <input value="Register" class="login-btn" type="button">
+                        </a>
+                    </div>
+
+                    <div class="event__card">
+                        <div class="registration-box">
+                            <h3 class="title">Login</h3>
+                            <form action="/users/login" method="post">
+                                <input name="email" value="" placeholder="Your email" type="email" required>
+                                <input name="password" value="" placeholder="Password" type="password" required>
+                                <input value="Submit" class="" type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="event-options pt-1" id="venue">
+
+        <div class="venue">
+            <div class="venue-inner">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="event__card">
+                            <h2 class="uppercase">streaming channels</h2>
+                            <p class="lead"> - Zoom </p>
+                            <p class="lead"> - Facebook Live </p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<%- include('./partials/footer.ejs') %>
+
+
+
+</body>
+
+</html>

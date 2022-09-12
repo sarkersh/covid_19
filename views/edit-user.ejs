@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+
+<header class="header regular">
+
+    <div class="container">
+        <%- include('./partials/nav.ejs', {auth:auth}) %>
+    </div>
+
+</header>
+
+<%- include('./partials/mobile-nav.ejs', {auth:auth}) %>
+
+<main>
+
+    <section class="event-options pt-1">
+
+        <div class="container">
+
+            <h1 class="event-option__heading text-center">Edit User</h1>
+
+            <div class="event event--options pt-1">
+
+                <div class="contact">
+
+                    <div class="event__card">
+                        <div class="registration-box w-mobile-100">
+                            <h3 class="title"> Edit User</h3>
+                            <form action="/users/update" method="post">
+                                <input name="fullname" placeholder="Your fullname" type="text" value="<%= userData.fullname %>" required>
+                                <input name="email" placeholder="Your email" type="email" value="<%= userData.email %>" required>
+                                <input name="password" placeholder="Password" type="text" value="<%= userData.password %>" required>
+                                <input type="hidden" name="user_id" value="<%= userData._id %>">
+                                <input value="Submit" class="" type="submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="event-options pt-1" id="venue">
+
+        <div class="venue">
+            <div class="venue-inner">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="event__card">
+                            <h2 class="uppercase">streaming channels</h2>
+                            <p class="lead"> - Zoom </p>
+                            <p class="lead"> - Facebook Live </p>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<%- include('./partials/footer.ejs') %>
+
+
+
+</body>
+
+</html>
