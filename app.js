@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('./db');
-const cors = require("cors");
+
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -29,8 +29,7 @@ app.use(express.json());
 // to not accept form data
 app.use(express.urlencoded({ extended: true }));
 
-// cors setup
-app.use(cors());
+
 
 app.use(cookieParser());
 
