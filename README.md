@@ -1,9 +1,9 @@
 
 # atlas
-login: google mail2lamin@gmail.com
+login: google sarkersh@gmail.com
 database: covid_19
-username: Covid_19Data
-password: HXBM7SOQxoWaVMzB
+username: sarkersh
+password: Shakil2023
 
 
 ### validate 
