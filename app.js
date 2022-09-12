@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('./db');
-
+const cors = require("cors");
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -28,6 +28,14 @@ app.use(express.json());
 
 // to not accept form data
 app.use(express.urlencoded({ extended: true }));
+
+// cors setup
+app.use(cors({
+
+  credentials: true,
+
+  origin: ['https://kaggle-world-covid-19.herokuapp.com/', 'http://localhost:5000'] //CLOUD
+}))
 
 
 
