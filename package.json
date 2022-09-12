@@ -1,6 +1,6 @@
 {
-  "name": "eventexpress",
-  "version": "0.0.0",
+  "name": "Kaggle-World-Covid-19",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -26,7 +26,7 @@
     "express-validator": "^6.13.0",
     "nodemon": "^2.0.19"
   },
-  "description": "login: google mail2lamin@gmail.com\r database: covid_19\r username: Covid_19Data\r password: HXBM7SOQxoWaVMzB",
+  "description": "login: google sarkersh@gmail.com database: covid_19 username: sarkersh password: Shakil2023",
   "main": "app.js",
   "repository": {
     "type": "git",
